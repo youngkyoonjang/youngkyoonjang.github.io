@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="CoMapGS improves sparse novel view synthesis quality by leveraging covisibility maps, covisibility-driven point cloud enhancement, and adaptive supervision with a proximity classifier, effectively handling both low- and high-uncertainty regions.">
+  <meta name="keywords" content="Sparse Novel View Synthesis, Covisiblility Map, 3DGS, Gaussian Splatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoMapGS: Covisiblility Map-based Gaussian Splatting for Sparse Novel View Synthesis</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://youngkyoonjang.github.io">
+      <span class="icon"><i class="fas fa-home"></i></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">CoMapGS: Covisiblility Map-based Gaussian Splatting for Sparse Novel View Synthesis</h1>
+          <h2 class="subtitle">CVPR 2025</h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://youngkyoonjang.github.io">Youngkyoon Jang</a>, </span>
+            <span class="author-block"><a href="https://perezpellitero.github.io">Eduardo P&eacute;rez-Pellitero</a></span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Huawei Noah's Ark Lab</span>
+          </div>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="paper.pdf" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://youngkyoonjang.github.io/CoMapGS" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://youngkyoonjang.github.io/CoMapGS" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-youtube"></i></span>
+                <span>Video</span>
+              </a>
+            </span>
+            <!-- <span class="link-block">
+              <a href="https://github.com/your-repo/CoMapGS" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <picture>
+            <img src="./static/images/Fig1_teaser_360.png" alt="teaser" />
+        </picture>
+      <h2 class="subtitle has-text-centered">
+        Main idea. Conventional sparse view synthesis methods using 3DGS prioritize frequently captured regions, shown as the brightest areas in the covisibility map, resulting in better reconstruction for these regions but missing details in sparsely captured areas. By using a covisibility map, we guide a sparse 3DGS to focus on these underrepresented regions, enhancing sparse novel view synthesis.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <p>
+            We propose Covisibility Map-based Gaussian Splatting (CoMapGS), designed to recover underrepresented sparse regions in sparse novel view synthesis. CoMapGS addresses both high- and low-uncertainty regions by constructing covisibility maps, enhancing initial point clouds, and applying uncertainty-aware weighted supervision with a proximity classifier. Our contributions are threefold: (1) CoMapGS reframes novel view synthesis by leveraging covisibility maps as a core component to address region-specific uncertainty levels; (2) Enhanced initial point clouds for both low- and high-uncertainty regions compensate for sparse COLMAP-derived point clouds, improving reconstruction quality and benefiting few-shot 3DGS methods; (3) Adaptive supervision with covisibility-score-based weighting and proximity classification achieves consistent performance gains across scenes with various sparsity scores derived from covisibility maps. Experimental results demonstrate that CoMapGS outperforms state-of-the-art methods on datasets including Mip-NeRF 360 and LLFF.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="./static/videos/14418_CoMapGS_Supplementary_material_video.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Results: rendering quality</h2>
+    LLFF Dataset
+    <picture>
+        <img src="./static/images/Fig3_comparison_llff3.png" alt="teaser" />
+    </picture>
+    <br><br>
+    Mip-NeRF 360 Dataset
+    <picture>
+        <img src="./static/images/Fig3_comparison_36012.png" alt="teaser" />
+    </picture>
+    <p class="has-text-centered">CoMapGS improves rendering quality in sparse view settings.</p>
+    <br><br>
+
+    <h2 class="title is-3">Results: geometric consistency</h2>
+    LLFF Dataset
+    <picture>
+        <img src="./static/images/Fig_Sup1_1_final_PCLs_LLFF1.png" alt="teaser" />
+        <img src="./static/images/Fig_Sup1_1_final_PCLs_LLFF2.png" alt="teaser" />
+    </picture>
+    <br><br>
+    Mip-NeRF 360 Dataset
+    <picture>
+        <img src="./static/images/Fig_Sup1_2_final_PCLs_3601.png" alt="teaser" />
+        <img src="./static/images/Fig_Sup1_2_final_PCLs_3602.png" alt="teaser" />
+    </picture>
+    <p class="has-text-centered">CoMapGS improves geometric consistency in sparse view settings.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@inproceedings{YoungkyoonJang2025CoMapGS,
+  author    = {Youngkyoon Jang and Eduardo P&eacute;rez-Pellitero},
+  title     = {CoMapGS: Covisiblility Map-based Gaussian Splatting for Sparse Novel View Synthesis},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2025}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="paper.pdf"><i class="fas fa-file-pdf"></i></a>
+      <a class="icon-link" href="https://youngkyoonjang.github.io/CoMapGS"><i class="fab fa-github"></i></a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a href="https://nerfies.github.io">Nerfies</a>.
+            Licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
