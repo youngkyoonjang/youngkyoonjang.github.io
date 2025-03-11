@@ -1,10 +1,10 @@
 # CoMapGS
 
-This repository contains the source code for the [CoMapGS website](https://youngkyoonjang.github.io/CoMapGS/).
+This repository contains the source code for the [CoMapGS website](https://youngkyoonjang.github.io/projects/comapgs/).
 
 If you find CoMapGS useful for your work, please cite:
 ```
-@inproceedings{youngkyoonjang2025comapgs,
+@inproceedings{jang2025comapgs,
   author    = {Youngkyoon Jang and Eduardo P&eacute;rez-Pellitero},
   title     = {CoMapGS: Covisiblility Map-based Gaussian Splatting for Sparse Novel View Synthesis},
   booktitle = {CVPR},
