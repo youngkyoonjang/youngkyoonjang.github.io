@@ -7,7 +7,7 @@ If you find CoMapGS useful for your work, please cite:
 @inproceedings{jang2025comapgs,
   author    = {Youngkyoon Jang and Eduardo P&eacute;rez-Pellitero},
   title     = {CoMapGS: Covisibility Map-based Gaussian Splatting for Sparse Novel View Synthesis},
-  booktitle = {CVPR},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year      = {2025},
 }
 ```
