@@ -4,6 +4,13 @@ This repository contains the source code for the [CoMapGS website](https://young
 
 If you find CoMapGS useful for your work, please cite:
 ```
+@article{jang2025comapgs,
+  author    = {Youngkyoon Jang and Eduardo P&eacute;rez-Pellitero},
+  title     = {CoMapGS: Covisibility Map-based Gaussian Splatting for Sparse Novel View Synthesis},
+  journal={arXiv preprint arXiv:2503.20998},
+  year={2025}
+}
+
 @inproceedings{jang2025comapgs,
   author    = {Youngkyoon Jang and Eduardo P&eacute;rez-Pellitero},
   title     = {CoMapGS: Covisibility Map-based Gaussian Splatting for Sparse Novel View Synthesis},
