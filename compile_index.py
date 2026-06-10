@@ -838,7 +838,7 @@ header_tmpl = """<!doctype html>
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="stylesheets/styles.css">
   </head>
-  <body class="dark-theme">
+  <body class="dark-theme" ontouchstart="">
 
     <!-- Floating Theme Switcher -->
     <button id="theme-toggle" class="floating-theme-btn" aria-label="Toggle Theme">

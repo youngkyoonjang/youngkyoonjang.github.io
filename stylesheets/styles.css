@@ -1023,11 +1023,19 @@ body.light-theme .timeline-tooltip {
   pointer-events: none;
 }
 
-.pub-entry .entry-media:hover img.first-page-img {
-  opacity: 1;
+@media (hover: hover) {
+  .pub-entry .entry-media:hover img.first-page-img {
+    opacity: 1;
+  }
+  .pub-entry .entry-media:hover img.representative-img {
+    opacity: 0;
+  }
 }
 
-.pub-entry .entry-media:hover img.representative-img {
+.pub-entry .entry-media:active img.first-page-img {
+  opacity: 1;
+}
+.pub-entry .entry-media:active img.representative-img {
   opacity: 0;
 }
 
