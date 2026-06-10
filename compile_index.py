@@ -1968,7 +1968,16 @@ html_out.append("""              </div>
           bottom: 68px;
           right: 16px;
           width: calc(100vw - 32px);
-          max-height: 380px;
+          max-height: 440px;
+        }
+        .feedback-comments-list {
+          max-height: 130px;
+        }
+        .feedback-comment-item {
+          padding: 6px 8px;
+        }
+        .feedback-form {
+          padding: 10px 14px 14px 14px;
         }
       }
     </style>
@@ -1996,7 +2005,7 @@ html_out.append("""              </div>
 
         <form id="feedback-form" class="feedback-form">
           <input type="text" id="feedback-name-input" class="feedback-input" placeholder="Name / Nickname" required maxlength="20">
-          <textarea id="feedback-text-input" class="feedback-input feedback-textarea" placeholder="Type your feedback here (max 150 chars)..." required maxlength="150" rows="3"></textarea>
+          <textarea id="feedback-text-input" class="feedback-input feedback-textarea" placeholder="Type your feedback here (max 150 chars)..." required maxlength="150" rows="2"></textarea>
           <button type="submit" class="feedback-submit-btn">Submit</button>
         </form>
       </div>
