@@ -1521,16 +1521,16 @@ body.dark-theme .pub-note-badge.award-highlight {
    REVIEWER & TPC FIELD-CATEGORIZED LIST
    ========================================================================== */
 .reviewer-title {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--accent-color, #069);
-  padding: 4px 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  margin-top: 15px;
-  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  border-left: 3px solid var(--accent-color, #069);
+  padding: 0;
+  padding-left: 8px;
+  margin-top: 24px;
+  margin-bottom: 12px;
   box-sizing: border-box;
 }
 
@@ -1539,6 +1539,7 @@ body.dark-theme .pub-note-badge.award-highlight {
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  padding-left: 11px; /* aligns categories vertically with the title text */
   box-sizing: border-box;
 }
 
@@ -1589,7 +1590,7 @@ body.dark-theme .pub-note-badge.award-highlight {
   opacity: 0.75;
   margin-top: 8px;
   margin-bottom: 16px;
-  padding: 0 12px;
+  padding: 0 11px; /* aligns vertically with the reviewer items */
   text-align: justify;
 }
 
