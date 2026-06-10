@@ -704,7 +704,7 @@ body.light-theme .timeline-tooltip {
 @media (max-width: 768px) {
   .timeline-compact-bar {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column-reverse !important;
     height: auto !important;
     align-items: flex-start !important;
     gap: 14px !important;
