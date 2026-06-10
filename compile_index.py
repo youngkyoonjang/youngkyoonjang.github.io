@@ -2059,8 +2059,8 @@ html_out.append("""              </div>
                 insideQuote = true;
               } else if (char === ',') {
                 row.push("");
-              } else if (char === '\r' || char === '\n') {
-                if (char === '\r' && nextChar === '\n') {
+              } else if (char === '\\r' || char === '\\n') {
+                if (char === '\\r' && nextChar === '\\n') {
                   i++;
                 }
                 lines.push(row);

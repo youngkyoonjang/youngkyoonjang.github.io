@@ -2632,10 +2632,8 @@
                 insideQuote = true;
               } else if (char === ',') {
                 row.push("");
-              } else if (char === '' || char === '
-') {
-                if (char === '' && nextChar === '
-') {
+              } else if (char === '\r' || char === '\n') {
+                if (char === '\r' && nextChar === '\n') {
                   i++;
                 }
                 lines.push(row);
