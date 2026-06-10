@@ -1235,7 +1235,7 @@ def parse_date_range(date_str):
     return start_val, end_val
 
 parsed_nodes = []
-for li in exp_lis:
+for idx, li in enumerate(exp_lis):
     m = re.match(r'^\s*\[(.*?)\]\s*:\s*(.*)', li)
     if not m:
         continue
@@ -1283,6 +1283,7 @@ for li in exp_lis:
         logo_img_html = f'<img src="images/{logo_file}" alt="{employer_name}">'
         
     parsed_nodes.append({
+        'cv_index': idx,
         'start_val': start_val,
         'end_val': end_val,
         'date_str': date_str,
@@ -1389,7 +1390,7 @@ for n in all_final_nodes:
 # Then render all nodes with their stems
 for n in all_final_nodes:
     timeline_html.append(f'''
-            <div class="timeline-node {n['track']}" data-node-id="{n['id']}" style="left: {n['pct']:.2f}%;">
+            <div class="timeline-node {n['track']}" data-node-id="{n['id']}" style="left: {n['pct']:.2f}%; --mobile-order: {n['cv_index']};">
               <div class="timeline-node-logo">
                 {n['logo_img_html']}
               </div>
