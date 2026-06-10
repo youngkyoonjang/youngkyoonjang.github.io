@@ -2696,23 +2696,56 @@
           e.preventDefault();
           const nameInput = document.getElementById('feedback-name-input');
           const textInput = document.getElementById('feedback-text-input');
+          const submitBtn = form.querySelector('.feedback-submit-btn');
           
           const name = nameInput.value.trim();
           const text = textInput.value.trim();
           
           if (!name || !text) return;
 
-          // Cute formatting for time
-          const now = new Date();
-          const timeStr = `${now.getMonth() + 1}/${now.getDate()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          // Disable button and show loading state
+          const originalBtnText = submitBtn.textContent;
+          submitBtn.textContent = 'Submitting...';
+          submitBtn.disabled = true;
 
-          const comment = { name, text, time: timeStr };
-          saveLocalComment(comment);
-          renderComments();
+          // Submit to Google Forms
+          const formData = new FormData();
+          formData.append('entry.353575263', name);
+          formData.append('entry.557142731', text);
 
-          // Reset inputs
-          nameInput.value = '';
-          textInput.value = '';
+          fetch('https://docs.google.com/forms/d/e/1FAIpQLSeGE_ocIg76OBIB1ukXmihOMLXmgTAkOfZj5zEMZExXZojl3w/formResponse', {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          })
+          .then(() => {
+            // Cute formatting for time
+            const now = new Date();
+            const timeStr = `${now.getMonth() + 1}/${now.getDate()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+            const comment = { name, text, time: timeStr };
+            saveLocalComment(comment);
+            renderComments();
+
+            showToast('Feedback submitted successfully! Thank you! 😊');
+
+            // Reset inputs
+            nameInput.value = '';
+            textInput.value = '';
+            
+            // Close card after a short delay
+            setTimeout(() => {
+              card.classList.remove('show');
+            }, 1000);
+          })
+          .catch((err) => {
+            console.error('Error submitting feedback:', err);
+            showToast('Submission failed. Please try again.');
+          })
+          .finally(() => {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+          });
         });
 
         // Initialize comments on load
