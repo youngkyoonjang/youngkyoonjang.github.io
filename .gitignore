@@ -1,0 +1,9 @@
+*.aux
+*.bbl
+*.blg
+*.gz
+*.out
+*.log
+*~
+files/my_papers.zip
+
