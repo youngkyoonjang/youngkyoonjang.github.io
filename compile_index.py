@@ -11,21 +11,8 @@ cv_path = os.path.join(script_dir, "curriculum_vitae.html")
 res_path = os.path.join(script_dir, "research.html")
 pub_path = os.path.join(script_dir, "publication.html")
 links_path = os.path.join(script_dir, "links.html")
-comments_path = os.path.join(script_dir, "comments.json")
-
 # Obfuscate Rivian & Autonomy/AI Team references for previewing site
 OBFUSCATE_EMPLOYER = True
-
-# Load static comments from comments.json
-static_comments = []
-if os.path.exists(comments_path):
-    try:
-        with open(comments_path, 'r', encoding='utf-8') as f:
-            static_comments = json.load(f)
-    except Exception as e:
-        print(f"Warning: Could not read comments.json: {e}")
-
-static_comments_js = json.dumps(static_comments, ensure_ascii=False)
 
 
 # Month mapping
@@ -2043,8 +2030,93 @@ html_out.append("""              </div>
           }
         });
 
-        // Fetch & render comments
-        const staticComments = """ + static_comments_js + """;
+        // Google Sheet CSV URL for dynamic comments
+        const googleSheetCSVUrl = ''; // Fill this with your published CSV link!
+        let googleComments = [];
+
+        function parseCSV(text) {
+          const lines = [];
+          let row = [""];
+          let insideQuote = false;
+          
+          for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            const nextChar = text[i+1];
+            
+            if (insideQuote) {
+              if (char === '"') {
+                if (nextChar === '"') {
+                  row[row.length - 1] += '"';
+                  i++;
+                } else {
+                  insideQuote = false;
+                }
+              } else {
+                row[row.length - 1] += char;
+              }
+            } else {
+              if (char === '"') {
+                insideQuote = true;
+              } else if (char === ',') {
+                row.push("");
+              } else if (char === '\r' || char === '\n') {
+                if (char === '\r' && nextChar === '\n') {
+                  i++;
+                }
+                lines.push(row);
+                row = [""];
+              } else {
+                row[row.length - 1] += char;
+              }
+            }
+          }
+          if (row.length > 1 || row[0] !== "") {
+            lines.push(row);
+          }
+          return lines;
+        }
+
+        function formatTimestamp(tsStr) {
+          if (!tsStr) return '';
+          let cleanStr = tsStr.replace(/오후/g, 'PM').replace(/오전/g, 'AM');
+          const d = new Date(cleanStr);
+          if (!isNaN(d.getTime())) {
+            const month = d.getMonth() + 1;
+            const date = d.getDate();
+            const hours = String(d.getHours()).padStart(2, '0');
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            return `${month}/${date} ${hours}:${minutes}`;
+          }
+          return tsStr.split(' ')[0] || tsStr;
+        }
+
+        async function fetchGoogleComments() {
+          if (!googleSheetCSVUrl || !googleSheetCSVUrl.startsWith('http')) {
+            return;
+          }
+          try {
+            const response = await fetch(googleSheetCSVUrl);
+            if (!response.ok) throw new Error('Network response not ok');
+            const csvText = await response.text();
+            const rows = parseCSV(csvText);
+            
+            const parsed = [];
+            for (let i = 1; i < rows.length; i++) {
+              const row = rows[i];
+              if (row.length >= 3 && row[1] && row[2]) {
+                parsed.push({
+                  name: row[1].trim(),
+                  text: row[2].trim(),
+                  time: formatTimestamp(row[0].trim())
+                });
+              }
+            }
+            googleComments = parsed.reverse();
+            renderComments();
+          } catch (e) {
+            console.error('Failed to fetch dynamic comments:', e);
+          }
+        }
 
         function getLocalComments() {
           try {
@@ -2072,7 +2144,7 @@ html_out.append("""              </div>
           // Deduplicate comments with the same name and text (e.g. from previous local caching)
           const mergedComments = [];
           const seenKeys = new Set();
-          [...localComments, ...staticComments].forEach(c => {
+          [...localComments, ...googleComments].forEach(c => {
             const key = `${c.name || ''}|${c.text || ''}`;
             if (!seenKeys.has(key)) {
               seenKeys.add(key);
@@ -2190,6 +2262,7 @@ html_out.append("""              </div>
 
         // Initialize comments on load
         renderComments();
+        fetchGoogleComments();
       });
     </script>
   </body>
