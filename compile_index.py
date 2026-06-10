@@ -866,7 +866,7 @@ header_tmpl = """<!doctype html>
         <div class="profile-info-area">
           <h1 class="profile-name">Youngkyoon Jang</h1>
           <p class="bio-paragraph">
-            I am a staff ML engineer on the Autonomy & AI Team at <a href="https://rivian.com/" target="_blank">Rivian</a> in London, where I work on perception for 3D vision and closed-loop simulation. I received my Ph.D. from <a href="http://www.kaist.ac.kr/html/en/" target="_blank">KAIST</a> in 2015, supervised by <a href="https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en" target="_blank">Woontack Woo</a> and co-advised by <a href="https://sites.google.com/view/tkkim/" target="_blank">Tae-Kyun Kim</a> (Imperial College London).
+            I am a staff ML engineer on the Autonomy & AI Team at <a href="https://rivian.com/" target="_blank">Rivian</a> (London), where I work on perception for 3D vision and closed-loop simulation. I received my Ph.D. from <a href="http://www.kaist.ac.kr/html/en/" target="_blank">KAIST</a> in 2015, advised by <a href="https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en" target="_blank">Woontack Woo</a> (KAIST) and co-advised by <a href="https://sites.google.com/view/tkkim/" target="_blank">Tae-Kyun Kim</a> (Imperial College London).
           </p>
           <p class="bio-paragraph">
             My research explores visual sensing technologies aiming to make interactions between humans and autonomous systems more intuitive in real-world environments. My expertise covers core technical challenges in computer vision and machine learning, focusing on 3D vision, pattern recognition, AR/VR, and human-machine interaction, with publications in top venues such as CVPR, ICCV, IJCV, CVIU, PRL, ISMAR, IEEE VR, TVCG, ICRA, THMS, 3DUI, and HCII.
@@ -923,8 +923,8 @@ if OBFUSCATE_EMPLOYER:
         '<div class="rivian-logo-container" style="display: flex; justify-content: center; margin-top: 12px;">\n            <div class="logo-obfuscated" style="font-family: \'Lato\', sans-serif; font-weight: 900; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--text-primary); text-transform: uppercase;">YYY</div>\n          </div>'
     )
     header_tmpl = header_tmpl.replace(
-        'I am a staff ML engineer on the Autonomy & AI Team at <a href="https://rivian.com/" target="_blank">Rivian</a> in London',
-        'I am a staff ML engineer on the XXX Team at YYY in London'
+        'I am a staff ML engineer on the Autonomy & AI Team at <a href="https://rivian.com/" target="_blank">Rivian</a> (London)',
+        'I am a staff ML engineer on the XXX Team at YYY (London)'
     )
 
 html_out.append(header_tmpl)
