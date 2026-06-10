@@ -2015,7 +2015,11 @@ html_out.append("""              </div>
         // Toggle card open/close
         fab.addEventListener('click', (e) => {
           e.stopPropagation();
+          const isOpening = !card.classList.contains('show');
           card.classList.toggle('show');
+          if (isOpening) {
+            fetchGoogleComments();
+          }
         });
 
         closeBtn.addEventListener('click', (e) => {
