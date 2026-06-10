@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Coffee_Lover",
+    "text": "Beep boop! 🤖 Your website looks so premium, but maybe you need a coffee button next? ☕️",
+    "time": "6/10 09:41"
+  },
+  {
+    "name": "Prof. Miller",
+    "text": "Impressive work on Gaussian Splatting! Looking forward to your CVPR presentation! 👏",
+    "time": "6/9 14:02"
+  },
+  {
+    "name": "Curious Student",
+    "text": "Your papers on wearable AR interaction were super helpful for my thesis project! Thank you!",
+    "time": "6/8 18:30"
+  },
+  {
+    "name": "Optimist",
+    "text": "This layout is cleaner than my room. Great UX!",
+    "time": "6/7 11:15"
+  }
+]
