@@ -1,0 +1,4 @@
+# Allow PDF files inside the files directory to be tracked,
+# overriding the global ~/.gitignore_global rule
+!files/**/*.pdf
+!files/*.pdf
