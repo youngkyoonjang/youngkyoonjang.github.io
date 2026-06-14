@@ -12,7 +12,7 @@ res_path = os.path.join(script_dir, "research.html")
 pub_path = os.path.join(script_dir, "publication.html")
 links_path = os.path.join(script_dir, "links.html")
 # Obfuscate Rivian & Autonomy/AI Team references for previewing site
-OBFUSCATE_EMPLOYER = True
+OBFUSCATE_EMPLOYER = False
 
 
 # Month mapping
@@ -72,7 +72,19 @@ image_mappings = {
     "Complementary Feature-point-based": "KIISE12",
     "Contactless Hand Posture Estimation": "KSBE14",
     "multiple objects localization and recognition": "HCI_Korea_2013",
-    "RGB-D image feature point extraction and description method": "KCC12"
+    "RGB-D image feature point extraction and description method": "KCC12",
+    # Mappings for research project titles
+    "Spatial Understanding": "map2thought",
+    "Neural Rendering for Sparse View Synthesis": "comapgs",
+    "Trustworthy Human Robot": "message_passing",
+    "Egocentric Video": "epic_tent",
+    "Behaviour/Affect": "face_ssd",
+    "Face Landmark Detection/Tracking": "face_landmark",
+    "Metaphoric Hand Gestures in VR": "metaphoric_gestures",
+    "3D Finger Gesture": "finger_cape",
+    "Semi-automatic ROI": "hcii2011",
+    "Smile Training": "entertainment09",
+    "Finger Vein": "JIPS08"
 }
 
 # Helper to clean text and fix malformed href whitespace
@@ -195,6 +207,10 @@ def simplify_venue(venue_str, year):
     if "방송공학회지" in v_upper:
         return f"방송공학회지{yr_str}"
     if "정보과학회논문지" in v_upper or "JOURNAL OF KIISE" in v_upper:
+        if "SOFTWARE AND APPLICATIONS" in v_upper:
+            return f"Journal of KIISE: Software and Applications{yr_str}"
+        if "COMPUTING PRACTICES AND LETTERS" in v_upper:
+            return f"Journal of KIISE: Computing Practices and Letters{yr_str}"
         return f"정보과학회논문지{yr_str}"
     if "전자공학회지" in v_upper:
         return f"전자공학회지{yr_str}"
@@ -460,7 +476,7 @@ def parse_publications():
                             
                     month = 1
                     for mname, mval in months.items():
-                        if re.search(r'\b' + mname + r'\b', text_to_search.lower()):
+                        if re.search(r'\b' + mname + r'\b', (venue + " " + pub_title).lower()):
                             month = mval
                             break
                 
@@ -769,7 +785,7 @@ def standardize_all_publication_images():
             new_w = int(img_w * ratio)
             new_h = int(img_h * ratio)
             
-            img_resized = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+            img_resized = img.resize((new_w, new_h), Image.LANCZOS)
             
             # Create a transparent background canvas
             new_img = Image.new('RGBA', (target_w, target_h), (0, 0, 0, 0))
@@ -1011,15 +1027,15 @@ for pub in publications_list:
         entry_class = f"pub-entry {cat}"
         # Determine the thumbnail filename extension (prefer gif if it exists, otherwise png)
         if "multi-layered_random_forest" in prefix or "symbolic_hand_gesture" in prefix:
-            thumb_ext = "gif"
             thumb_prefix = "metaphoric_gestures"
         else:
-            thumb_ext = "gif" if os.path.exists(f"images/papers/{prefix}_thumbnail.gif") else "png"
             thumb_prefix = prefix
+        has_gif = os.path.exists(f"images/papers/{thumb_prefix}_thumbnail.gif")
+        gif_attr = f' data-gif="images/papers/{thumb_prefix}_thumbnail.gif"' if has_gif else ''
         media_html = f"""
             <div class="entry-media">
-              <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{title} Representative">
-              <img src="images/papers/{thumb_prefix}_thumbnail.{thumb_ext}" class="first-page-img" alt="{title} Thumbnail">
+              <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{title} Representative" loading="lazy">
+              <img src="images/papers/{thumb_prefix}_thumbnail.png" class="first-page-img" alt="{title} Thumbnail" loading="lazy"{gif_attr}>
             </div>"""
     else:
         entry_class = f"pub-entry {cat} no-image-entry"
@@ -1092,7 +1108,7 @@ html_out.append("""
 """)
 
 for idx, proj in enumerate(projects_list):
-    if idx == 5:
+    if idx == 1:
         html_out.append(f"""          </div>
           
           <div id="projects-details" class="extendable-content">
@@ -1101,12 +1117,12 @@ for idx, proj in enumerate(projects_list):
     
     prefix = proj['image_prefix']
     if prefix:
-        # Determine the thumbnail filename extension (prefer gif if it exists, otherwise png)
-        thumb_ext = "gif" if os.path.exists(f"images/papers/{prefix}_thumbnail.gif") else "png"
+        has_gif = os.path.exists(f"images/papers/{prefix}_thumbnail.gif")
+        gif_attr = f' data-gif="images/papers/{prefix}_thumbnail.gif"' if has_gif else ''
         media_html = f"""
               <div class="entry-media">
-                <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{proj['title_clean']} Overview">
-                <img src="images/papers/{prefix}_thumbnail.{thumb_ext}" class="first-page-img" alt="{proj['title_clean']} Thumbnail">
+                <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{proj['title_clean']} Overview" loading="lazy">
+                <img src="images/papers/{prefix}_thumbnail.png" class="first-page-img" alt="{proj['title_clean']} Thumbnail" loading="lazy"{gif_attr}>
               </div>"""
     else:
         media_html = """
@@ -1127,7 +1143,7 @@ for idx, proj in enumerate(projects_list):
               </div>
             </div>""")
 
-if len(projects_list) > 5:
+if len(projects_list) > 1:
     html_out.append("""            </div>
           </div>
           
@@ -1487,6 +1503,7 @@ html_out.append("""
         <!-- ================= PATENTS & SOFTWARE ================= -->
         <section class="flow-section" id="patents-section">
           <h2 class="section-title">Patents & Software Registrations</h2>
+          <div style="font-size: 0.85rem; color: #666; margin-bottom: 12px; font-style: italic;">* This list is not up to date.</div>
           <div class="extend-section-wrapper" style="margin-top: 0;">
 
             <!-- Accordion: International Patents -->
@@ -1714,6 +1731,21 @@ html_out.append("""              </div>
         // Close tooltips when clicking anywhere else
         document.addEventListener('click', () => {
           tooltips.forEach(t => t.classList.remove('active'));
+        });
+
+        // Lazy-load GIFs on hover
+        const entryMedias = document.querySelectorAll('.entry-media');
+        entryMedias.forEach(media => {
+          const gifImg = media.querySelector('img[data-gif]');
+          if (gifImg) {
+            const gifUrl = gifImg.getAttribute('data-gif');
+            media.addEventListener('mouseenter', () => {
+              const currentSrc = gifImg.getAttribute('src');
+              if (!currentSrc || !currentSrc.endsWith('.gif')) {
+                gifImg.src = gifUrl;
+              }
+            });
+          }
         });
 
         // Highlight matching duration bar when hovering over a logo
