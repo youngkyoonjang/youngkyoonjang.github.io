@@ -859,7 +859,7 @@ header_tmpl = """<!doctype html>
       <header class="profile-header">
         <div class="profile-avatar-area">
           <div class="profile-frame">
-            <img class="profile-img" src="images/YoungkyoonJang.png" alt="Youngkyoon Jang">
+            <img class="profile-img" src="images/YoungkyoonJang.webp" alt="Youngkyoon Jang" fetchpriority="high">
           </div>
           <div class="rivian-logo-container" style="display: flex; justify-content: center; margin-top: 12px;">
             <img src="images/rivian_logo.svg" class="logo-dark" alt="Rivian Icon" style="width: 80px; height: auto;">
@@ -987,7 +987,7 @@ html_out.append("""
           <div class="publications-flow" id="publications-flow-container">
 """)
 
-for pub in publications_list:
+for idx, pub in enumerate(publications_list):
     cat = pub['category']
     title = pub['title']
     authors = pub['authors']
@@ -1031,12 +1031,12 @@ for pub in publications_list:
             thumb_prefix = "metaphoric_gestures"
         else:
             thumb_prefix = prefix
-        has_gif = os.path.exists(f"images/papers/{thumb_prefix}_thumbnail.gif")
-        thumb_ext = "gif" if has_gif else "png"
+        lazy_attr = "" if idx < 3 else ' loading="lazy"'
+        priority_attr = ' fetchpriority="high"' if idx < 3 else ""
         media_html = f"""
             <div class="entry-media">
-              <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{title} Representative" loading="lazy">
-              <img src="images/papers/{thumb_prefix}_thumbnail.{thumb_ext}" class="first-page-img" alt="{title} Thumbnail" loading="lazy">
+              <img src="images/papers/{prefix}_representative.webp" class="representative-img" alt="{title} Representative"{lazy_attr}{priority_attr}>
+              <img src="images/papers/{thumb_prefix}_thumbnail.webp" class="first-page-img" alt="{title} Thumbnail"{lazy_attr}{priority_attr}>
             </div>"""
     else:
         entry_class = f"pub-entry {cat} no-image-entry"
@@ -1119,12 +1119,12 @@ for idx, proj in enumerate(projects_list):
     
     prefix = proj['image_prefix']
     if prefix:
-        has_gif = os.path.exists(f"images/papers/{prefix}_thumbnail.gif")
-        thumb_ext = "gif" if has_gif else "png"
+        lazy_attr = "" if idx < 2 else ' loading="lazy"'
+        priority_attr = ' fetchpriority="high"' if idx < 2 else ""
         media_html = f"""
               <div class="entry-media">
-                <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{proj['title_clean']} Overview" loading="lazy">
-                <img src="images/papers/{prefix}_thumbnail.{thumb_ext}" class="first-page-img" alt="{proj['title_clean']} Thumbnail" loading="lazy">
+                <img src="images/papers/{prefix}_representative.webp" class="representative-img" alt="{proj['title_clean']} Overview"{lazy_attr}{priority_attr}>
+                <img src="images/papers/{prefix}_thumbnail.webp" class="first-page-img" alt="{proj['title_clean']} Thumbnail"{lazy_attr}{priority_attr}>
               </div>"""
     else:
         media_html = """
@@ -1180,12 +1180,12 @@ html_out.append("""
 
 logo_map = {
     "rivian": ("rivian_logo.svg", "Rivian"),
-    "huawei": ("Huawei_logo.png", "Huawei Noah's Ark"),
+    "huawei": ("Huawei_logo.webp", "Huawei Noah's Ark"),
     "disguise": ("disguise-logo-stack.png", "Disguise"),
     "bristol": ("bristol_logo.png", "Bristol"),
     "queen mary": ("qmul_logo.png", "QMUL"),
     "qmul": ("qmul_logo.png", "QMUL"),
-    "cambridge": ("cambridge_logo.png", "Cambridge"),
+    "cambridge": ("cambridge_logo.webp", "Cambridge"),
     "imperial": ("Imperial_logo.jpg", "Imperial College"),
     "icl": ("Imperial_logo.jpg", "Imperial College"),
     "kaist": ("kaist_logo.jpg", "KAIST"),
