@@ -323,6 +323,7 @@ def extract_special_notes(venue_full):
 
 def parse_news():
     news = [
+        {"date": "2026.06.18", "desc": "Paper accepted to ECCV, Malmö, Sweden. [<a href=\"http://arxiv.org/abs/2601.03024\" target=\"_blank\" rel=\"nofollow\">arXiv</a>]"},
         {"date": "2026.06.15", "desc": "Joined the Autonomy & AI team at Rivian as a staff ML engineer."},
         {"date": "2026.06.11", "desc": "Invited talk at EECS, Queen Mary University of London."},
         {"date": "2026.02.20", "desc": "Paper accepted to IEEE/CVF CVPR (Findings), Denver, CO, USA. [<a href=\"https://arxiv.org/abs/2601.11442\" target=\"_blank\" rel=\"nofollow\">arXiv</a>]"},
@@ -389,7 +390,7 @@ def parse_publications():
         ("Domestic Journal (in Korean)", "dom-journal"),
         ("International Conference", "int-conference"),
         ("Domestic Conference (in Korean)", "dom-conference"),
-        ("ETC (poster:1, arXiv:1, workshop:3, demo:0)", "etc-pub")
+        ("ETC (poster:1, arXiv:0, workshop:3, demo:0)", "etc-pub")
     ]
     
     all_pubs = []
@@ -1066,10 +1067,11 @@ for pub in publications_list:
 
     year = pub['date'][0]
     year_str = f", <strong>{year}</strong>" if year > 0 else ""
+    accepted_str = " (accepted)" if (venue_full and "accepted" in venue_full.lower()) else ""
     if venue_full and venue_full != venue:
-        venue_html = f'<div class="pub-venue tooltip-container" style="display: inline-block;"><strong>{venue}</strong>{year_str}<span class="tooltip-text">{venue_full}</span></div>'
+        venue_html = f'<div class="pub-venue tooltip-container" style="display: inline-block;"><strong>{venue}</strong>{year_str}{accepted_str}<span class="tooltip-text">{venue_full}</span></div>'
     else:
-        venue_html = f'<div class="pub-venue" style="display: inline-block;"><strong>{venue}</strong>{year_str}</div>'
+        venue_html = f'<div class="pub-venue" style="display: inline-block;"><strong>{venue}</strong>{year_str}{accepted_str}</div>'
             
     korean_raw = pub.get('korean_raw')
     if korean_raw:
