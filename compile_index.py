@@ -1032,11 +1032,11 @@ for pub in publications_list:
         else:
             thumb_prefix = prefix
         has_gif = os.path.exists(f"images/papers/{thumb_prefix}_thumbnail.gif")
-        gif_attr = f' data-gif="images/papers/{thumb_prefix}_thumbnail.gif"' if has_gif else ''
+        thumb_ext = "gif" if has_gif else "png"
         media_html = f"""
             <div class="entry-media">
               <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{title} Representative" loading="lazy">
-              <img src="images/papers/{thumb_prefix}_thumbnail.png" class="first-page-img" alt="{title} Thumbnail" loading="lazy"{gif_attr}>
+              <img src="images/papers/{thumb_prefix}_thumbnail.{thumb_ext}" class="first-page-img" alt="{title} Thumbnail" loading="lazy">
             </div>"""
     else:
         entry_class = f"pub-entry {cat} no-image-entry"
@@ -1120,11 +1120,11 @@ for idx, proj in enumerate(projects_list):
     prefix = proj['image_prefix']
     if prefix:
         has_gif = os.path.exists(f"images/papers/{prefix}_thumbnail.gif")
-        gif_attr = f' data-gif="images/papers/{prefix}_thumbnail.gif"' if has_gif else ''
+        thumb_ext = "gif" if has_gif else "png"
         media_html = f"""
               <div class="entry-media">
                 <img src="images/papers/{prefix}_representative.png" class="representative-img" alt="{proj['title_clean']} Overview" loading="lazy">
-                <img src="images/papers/{prefix}_thumbnail.png" class="first-page-img" alt="{proj['title_clean']} Thumbnail" loading="lazy"{gif_attr}>
+                <img src="images/papers/{prefix}_thumbnail.{thumb_ext}" class="first-page-img" alt="{proj['title_clean']} Thumbnail" loading="lazy">
               </div>"""
     else:
         media_html = """
