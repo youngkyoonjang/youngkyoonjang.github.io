@@ -873,7 +873,7 @@ header_tmpl = """<!doctype html>
             I am a staff ML engineer on the Autonomy & AI Team at <a href="https://rivian.com/" target="_blank">Rivian</a> in London, where I work on 3D vision and closed-loop simulation. I received my Ph.D. from <a href="http://www.kaist.ac.kr/html/en/" target="_blank">KAIST</a> in 2015, advised by <a href="https://scholar.google.com/citations?user=s3Z4Q1oAAAAJ&hl=en" target="_blank">Woontack Woo</a> (KAIST) and co-advised by <a href="https://sites.google.com/view/tkkim/" target="_blank">Tae-Kyun Kim</a> (Imperial College London).
           </p>
           <p class="bio-paragraph">
-            My research explores visual sensing technologies aiming to make interactions between humans and autonomous systems more intuitive in real-world environments. My expertise covers core technical challenges in computer vision and machine learning, focusing on 3D vision (CVPR, ICCV, IJCV, CVIU), pattern recognition (PRL), AR/VR (ISMAR, IEEE VR, TVCG), and human-machine interaction (ICRA, THMS, 3DUI, HCII).
+            My research explores visual sensing technologies aiming to make interactions between humans and autonomous systems more intuitive in real-world environments. My expertise covers core technical challenges in computer vision and machine learning, focusing on 3D vision (CVPR, ICCV, ECCV, IJCV, CVIU), pattern recognition (PRL), AR/VR (ISMAR, IEEE VR, TVCG), and human-machine interaction (ICRA, THMS, 3DUI, HCII).
           </p>
           
           <div class="social-links-row" style="margin-top: 24px;">
