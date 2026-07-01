@@ -323,7 +323,7 @@ def extract_special_notes(venue_full):
 
 def parse_news():
     news = [
-        {"date": "2026.06.18", "desc": "Paper accepted to ECCV, Malmö, Sweden. [<a href=\"http://arxiv.org/abs/2601.03024\" target=\"_blank\" rel=\"nofollow\">arXiv</a>]"},
+        {"date": "2026.06.18", "desc": "Paper accepted to ECCV, Malmö, Sweden. [<a href=\"https://saresgs.github.io\" target=\"_blank\" rel=\"nofollow\">Project</a>] [<a href=\"http://arxiv.org/abs/2601.03024\" target=\"_blank\" rel=\"nofollow\">arXiv</a>]"},
         {"date": "2026.06.15", "desc": "Joined the Autonomy & AI team at Rivian as a staff ML engineer."},
         {"date": "2026.06.11", "desc": "Invited talk at EECS, Queen Mary University of London."},
         {"date": "2026.02.20", "desc": "Paper accepted to IEEE/CVF CVPR (Findings), Denver, CO, USA. [<a href=\"https://arxiv.org/abs/2601.11442\" target=\"_blank\" rel=\"nofollow\">arXiv</a>]"},
