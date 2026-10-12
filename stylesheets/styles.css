@@ -1155,9 +1155,15 @@ body.light-theme .timeline-tooltip {
   border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  background-color: rgba(var(--accent-color-rgb), 0.1);
-  color: var(--accent-color);
-  border: 1px solid rgba(var(--accent-color-rgb), 0.2);
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+body.dark-theme .pub-note-badge {
+  background-color: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
 }
 
 .pub-note-badge.award-highlight {
